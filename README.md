@@ -1,7 +1,3 @@
-# Allocation-Return-Prediction
-
-# Allocation Return Direction Prediction
-
 # Allocation Return Direction Prediction
 
 We aim to predict the **sign of next-day returns** for a set of asset allocations using their recent history of returns and signed volumes.
