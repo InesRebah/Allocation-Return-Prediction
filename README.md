@@ -1,32 +1,37 @@
 # Allocation Return Direction Prediction
 
-We aim to predict the **sign of next-day returns** for a set of asset allocations using their recent history of returns and signed volumes.
+## Objective
+The goal of this challenge is to predict the **direction of next-day returns** for a set of asset allocations using 20 lagged returns and signed volumes.
 
-- We start from a simple baseline: **short-term momentum**, modeled with:
-  - logistic regression (strongly regularized)  
-  - a shallow penalized decision tree  
+## Approach
 
-- We work in a **pooled cross-sectional setting**, treating each allocation as a strategy  
+- We start with a simple baseline based on **short-term momentum**, using:
+  - logistic regression  
+  - a heavily regularized decision tree  
 
-- Rather than relying on raw lags, we progressively build **profile-based features**:
-  - return structure (trend, stability, monotonicity)  
-  - flow dynamics (signed volume persistence, imbalance, exhaustion)  
-  - market conditions (volatility, turnover, group structure)  
-  - interactions between flow and returns  
+- Models are trained in a **pooled cross-sectional setting** across all allocations  
 
-- We combine the objective of pure prediction with an objective of **selection**:
-  - identify when an allocation is **predictable**  
-  - focus on **cross-sectional ranking within each day**  
+- Performance is evaluated **conditionally** on:
+  - volatility  
+  - turnover  
+  - a GROUP variable  
 
-- Performance is evaluated through:
-  - direction prediction  
-  - return and return change (value and sign)  
-  - ranking quality across allocations  
-  - conditional analysis (volatility, turnover, group)  
+- We then progressively construct additional signals capturing:
+  - strategy strength  
+  - market conditions  
+  - interactions with flow (signed volume)  
 
-- We explicitly account for **regime dependence**, as predictability varies with:
-  - flow persistence vs exhaustion  
-  - market volatility and dispersion  
+- Signals are evaluated based on their ability to predict:
+  - next-day return  
+  - the sign of next-day return  
+  - the change in returns (and its sign)  
+
+- We also evaluate performance in a **cross-sectional setting** by:
+  - ranking allocations within each day  
+  - combining this ranking with a prediction of **market breadth**  
+
+## Goal
+Build signals that improve prediction while understanding **when and where they are effective**.
 
 **Goal:**  
 not just predict returns, but detect when a strategy is in a **predictable state and worth trading**
