@@ -32,6 +32,3 @@ The goal of this challenge is to predict the **direction of next-day returns** f
 
 ## Goal
 Build signals that improve prediction while understanding **when and where they are effective**.
-
-**Goal:**  
-not just predict returns, but detect when a strategy is in a **predictable state and worth trading**
